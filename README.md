@@ -18,7 +18,7 @@ These instructions will get you a copy of the project up and running on your loc
 
 ## Authors
 
-* **Thomas Theunen** - *Initial work* - [PurpleBooth](https://thomastheunen.eu)
+* **Thomas Theunen** - *Initial work* - [thomastheunen.eu](https://thomastheunen.eu)
 
 ## License
 
