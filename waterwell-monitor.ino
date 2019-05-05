@@ -1,4 +1,6 @@
-
+/**
+ * 
+ */
 void setup() {
   Serial.begin(9600); // Open serial monitor at 115200 baud to see ping results.
   Serial.println("Initializing Water Well Monitor...");
@@ -9,6 +11,9 @@ void setup() {
   Serial.println("Water Well Monitor initialized.");
 }
 
+/**
+ * 
+ */
 void loop() {
   handleRequests();
   // Serial.print(calculateDistance());

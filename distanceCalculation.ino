@@ -4,11 +4,19 @@ const int echoPin = 12;
 long duration;
 int distanceCm;
 
+/**
+ * Initializes the pins for the range sensor.
+ */
 void initDistanceSensor() {
   pinMode(trigPin, OUTPUT);
   pinMode(echoPin, INPUT);
 }
 
+/**
+ * Calculates the distance to the target in CM.
+ * 
+ * @returns {int} - The distance in CM.
+ */
 int calculateDistance() {
   digitalWrite(trigPin, LOW);
   delayMicroseconds(2);
