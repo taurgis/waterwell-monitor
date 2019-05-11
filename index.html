@@ -7,10 +7,16 @@
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
         integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
-
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
 
 
     <style>
+        body {
+            font-family: Nunito, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+        }
+
         .bg-main {
             background-color: #4e73df;
         }
@@ -18,13 +24,28 @@
         .sidebar-divider {
             border-top: 1px solid rgba(255, 255, 255, .15);
         }
+
+        .text-decoration-none:hover {
+            text-decoration: none;
+        }
+
+        .sidebar-heading {
+            color: rgba(255, 255, 255, .4);
+            font-weight: 800;
+            font-size: .65rem;
+            text-transform: uppercase;
+        }
+
+        .text-sidebar {
+            color: rgba(255, 255, 255, .8);
+        }
     </style>
 </head>
 
 <body class="h-100">
     <div class="container-fluid h-100">
         <div class="row ">
-            <div class="col-2 text-left bg-main my-auto pt-4">
+            <div class="col-2 text-left bg-main my-auto pt-2">
                 <img alt="Bootstrap Image Preview" width="50"
                     src="http://www.olivierbeton.be/sites/default/files/rwp_3000lregenwaterputten.jpg"
                     class="rounded-circle my-2" />
@@ -38,11 +59,24 @@
         </div>
         <div class="row h-100">
             <div class="col-md-2 bg-main pt-2">
-                <a class="text-white" href="index.html">
+                <a class="text-white text-decoration-none" href="index.html">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span class="ml-1">Dashboard</span>
                 </a>
-                <hr class="sidebar-divider mt-2">
+                <hr class="sidebar-divider my-2">
+
+                <div class="sidebar-heading">
+                    Configuration
+                </div>
+                <a class="text-decoration-none d-block mt-2  text-sidebar" href="settings.html">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span class="ml-1 ">Well settings</span>
+                </a>
+                <a class="text-decoration-none d-block mt-2  text-sidebar" href="interface.html">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span class="ml-1 ">Interface settings</span>
+                </a>
+
             </div>
             <div class="col-md-10">
                 <table class="table">
@@ -52,13 +86,13 @@
                                 #
                             </th>
                             <th>
-                                Product
+                                Liters in well
                             </th>
                             <th>
-                                Payment Taken
+                                Difference
                             </th>
                             <th>
-                                Status
+                                Time
                             </th>
                         </tr>
                     </thead>
@@ -68,69 +102,27 @@
                                 1
                             </td>
                             <td>
-                                TB - Monthly
+                                10.000 L
+                            </td>
+                            <td class="text-success">
+                                + 50 L
                             </td>
                             <td>
-                                01/04/2012
-                            </td>
-                            <td>
-                                Default
+                                11/05/2019
                             </td>
                         </tr>
-                        <tr class="table-active">
-                            <td>
-                                1
-                            </td>
-                            <td>
-                                TB - Monthly
-                            </td>
-                            <td>
-                                01/04/2012
-                            </td>
-                            <td>
-                                Approved
-                            </td>
-                        </tr>
-                        <tr class="table-success">
+                        <tr>
                             <td>
                                 2
                             </td>
                             <td>
-                                TB - Monthly
+                                9.9950 L
                             </td>
                             <td>
-                                02/04/2012
+                                0 L
                             </td>
                             <td>
-                                Declined
-                            </td>
-                        </tr>
-                        <tr class="table-warning">
-                            <td>
-                                3
-                            </td>
-                            <td>
-                                TB - Monthly
-                            </td>
-                            <td>
-                                03/04/2012
-                            </td>
-                            <td>
-                                Pending
-                            </td>
-                        </tr>
-                        <tr class="table-danger">
-                            <td>
-                                4
-                            </td>
-                            <td>
-                                TB - Monthly
-                            </td>
-                            <td>
-                                04/04/2012
-                            </td>
-                            <td>
-                                Call in to confirm
+                                10/05/2019
                             </td>
                         </tr>
                     </tbody>
