@@ -7,10 +7,6 @@ ESP8266WebServer server(80);
 const char* ssid     = "";
 const char* password = "";
 
-int diameter = 0;
-int depth = 0;
-int distance = 0;
-
 WiFiClient client;
 
 String header;
@@ -23,23 +19,12 @@ void initializeServer() {
   Serial.println(ssid);
   
   WiFi.begin(ssid, password);
-  EEPROM.begin(25);
   
   while (WiFi.status() != WL_CONNECTED) {
     delay(500);
     Serial.print(".");
   }
-
-  diameter = EEPROM.read(1);
-  depth = EEPROM.read(2);
-  distance = EEPROM.read(3);
   
-  Serial.println("");
-  Serial.println("Loading data:");
-  Serial.println(diameter);
-  Serial.println(depth);
-  Serial.println(distance);
-  Serial.println("");
   Serial.println("WiFi connected.");
   Serial.println("IP address: ");
   Serial.println(WiFi.localIP());
