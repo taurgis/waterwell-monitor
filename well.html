@@ -49,15 +49,8 @@
 <body class="h-100">
     <div class="container-fluid h-100">
         <div class="row ">
-            <div class="col-2 text-left bg-main my-auto pt-2">
-                <img alt="Bootstrap Image Preview" width="50"
-                    src="http://www.olivierbeton.be/sites/default/files/rwp_3000lregenwaterputten.jpg"
-                    class="rounded-circle my-2" />
-
-                <h6 class="text-left d-inline font-weight-bold ml-2">
-                    Water Well Monitor
-                </h6>
-
+            <div class="col-2 text-left bg-main my-auto pt-2 text-center">
+                <svg height="50" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="water" class="svg-inline--fa fa-water fa-w-18" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path fill="currentColor" d="M562.1 383.9c-21.5-2.4-42.1-10.5-57.9-22.9-14.1-11.1-34.2-11.3-48.2 0-37.9 30.4-107.2 30.4-145.7-1.5-13.5-11.2-33-9.1-46.7 1.8-38 30.1-106.9 30-145.2-1.7-13.5-11.2-33.3-8.9-47.1 2-15.5 12.2-36 20.1-57.7 22.4-7.9.8-13.6 7.8-13.6 15.7v32.2c0 9.1 7.6 16.8 16.7 16 28.8-2.5 56.1-11.4 79.4-25.9 56.5 34.6 137 34.1 192 0 56.5 34.6 137 34.1 192 0 23.3 14.2 50.9 23.3 79.1 25.8 9.1.8 16.7-6.9 16.7-16v-31.6c.1-8-5.7-15.4-13.8-16.3zm0-144c-21.5-2.4-42.1-10.5-57.9-22.9-14.1-11.1-34.2-11.3-48.2 0-37.9 30.4-107.2 30.4-145.7-1.5-13.5-11.2-33-9.1-46.7 1.8-38 30.1-106.9 30-145.2-1.7-13.5-11.2-33.3-8.9-47.1 2-15.5 12.2-36 20.1-57.7 22.4-7.9.8-13.6 7.8-13.6 15.7v32.2c0 9.1 7.6 16.8 16.7 16 28.8-2.5 56.1-11.4 79.4-25.9 56.5 34.6 137 34.1 192 0 56.5 34.6 137 34.1 192 0 23.3 14.2 50.9 23.3 79.1 25.8 9.1.8 16.7-6.9 16.7-16v-31.6c.1-8-5.7-15.4-13.8-16.3zm0-144C540.6 93.4 520 85.4 504.2 73 490.1 61.9 470 61.7 456 73c-37.9 30.4-107.2 30.4-145.7-1.5-13.5-11.2-33-9.1-46.7 1.8-38 30.1-106.9 30-145.2-1.7-13.5-11.2-33.3-8.9-47.1 2-15.5 12.2-36 20.1-57.7 22.4-7.9.8-13.6 7.8-13.6 15.7v32.2c0 9.1 7.6 16.8 16.7 16 28.8-2.5 56.1-11.4 79.4-25.9 56.5 34.6 137 34.1 192 0 56.5 34.6 137 34.1 192 0 23.3 14.2 50.9 23.3 79.1 25.8 9.1.8 16.7-6.9 16.7-16v-31.6c.1-8-5.7-15.4-13.8-16.3z"></path></svg>
                 <hr class="sidebar-divider my-0">
             </div>
             <div class="col-10 d-flex justify-content-between"
@@ -100,10 +93,10 @@
                     <div class="row">
                         <div class="col-12 col-md-6 col-lg-4">
                             <p>
-                                <form class="w-100">
+                                <form class="w-100" method="GET" action="well.html">
                                     <div class="form-group">
                                         <label for="diameter" class="font-weight-bold">Well diameter</label>
-                                        <input type="text" class="form-control" id="diameter"
+                                        <input type="text" class="form-control" name="diameter"
                                             aria-describedby="diameterHelp" placeholder="e.g. 250">
                                         <small id="diameterHelp" class="form-text text-muted">The diameter of the well
                                             in
@@ -111,7 +104,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="depth" class="font-weight-bold">Well depth</label>
-                                        <input type="text" class="form-control" id="depth" placeholder="e.g. 200"
+                                        <input type="text" class="form-control" name="depth" placeholder="e.g. 200"
                                             aria-describedby="depthHelp">
                                         <small id="depthHelp" class="form-text text-muted">The depth of the well in
                                             CM.</small>
@@ -119,7 +112,7 @@
                                     
                                     <div class="form-group">
                                         <label for="distance" class="font-weight-bold">Meter distance</label>
-                                        <input type="text" class="form-control" id="distance" placeholder="e.g. 40"
+                                        <input type="text" class="form-control" name="distance" placeholder="e.g. 40"
                                             aria-describedby="distanceHelp">
                                         <small id="distanceHelp" class="form-text text-muted">The distance of the meter above the well in CM. (For example if you put it in the shaft above it).</small>
                                     </div>
