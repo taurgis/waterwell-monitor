@@ -1,10 +1,15 @@
 #include <ESP8266WiFi.h>
 #include <ESP8266WebServer.h>
+#include <EEPROM.h>
 
 ESP8266WebServer server(80);
 
 const char* ssid     = "";
 const char* password = "";
+
+int diameter = 0;
+int depth = 0;
+int distance = 0;
 
 WiFiClient client;
 
@@ -16,23 +21,33 @@ String header;
 void initializeServer() {
   Serial.print("Connecting to ");
   Serial.println(ssid);
-
+  
   WiFi.begin(ssid, password);
-
+  EEPROM.begin(512);
+  
   while (WiFi.status() != WL_CONNECTED) {
     delay(500);
     Serial.print(".");
   }
 
+  diameter = EEPROM.read(1);
+  depth = EEPROM.read(2);
+  distance = EEPROM.read(3);
+  
+  Serial.println("");
+  Serial.println("Loading data:");
+  Serial.println(diameter);
+  Serial.println(depth);
+  Serial.println(distance);
   Serial.println("");
   Serial.println("WiFi connected.");
   Serial.println("IP address: ");
   Serial.println(WiFi.localIP());
 
 
-  server.on("/index.html", handleHomepage); 
-  server.on("/well.html", handleWell); 
-  
+  server.on("/index.html", handleHomepage);
+  server.on("/well.html", handleWell);
+
   server.begin();
 }
 
@@ -41,16 +56,41 @@ void handleHomepage() {
   result += generateHTMLHead();
   result += generateHTMLBody(false);
   result += generateHTMLFooter();
-  
+
   server.send(200, "text/html", result);
 }
 
 void handleWell() {
   String result = "";
+  for (int i = 0; i < server.args(); i++) {
+    Serial.println("");
+    Serial.println("Received arg: ");
+    Serial.print(server.argName(i));
+    Serial.print(", ");
+    Serial.print(server.arg(i));
+
+
+    if (server.argName(i) == "diameter") {
+      EEPROM.write(1, server.arg(i).toInt());
+      diameter = server.arg(i).toInt();
+    }
+
+    if (server.argName(i) == "depth") {
+      EEPROM.write(2, server.arg(i).toInt());
+      depth = server.arg(i).toInt();
+    }
+
+    if (server.argName(i) == "distance") {
+      EEPROM.write(3, server.arg(i).toInt());
+      distance = server.arg(i).toInt();
+      EEPROM.commit();
+    }
+  }
+
   result += generateHTMLHead();
   result += generateHTMLBody(true);
   result += generateHTMLFooter();
-  
+
   server.send(200, "text/html", result);
 }
 
@@ -65,7 +105,15 @@ String generateHTMLHead() {
 
 String generateHTMLBody(boolean isWellPage) {
   if (isWellPage == true) {
-    return "<div class=\"col-md-10\" style=\"background-color: #f8f9fc;\"> <h1 class=\"h3 mb-0 text-gray-800 mt-3\">Well settings</h1> <p class=\"mt-3\"> Here the well settings need to be configured to do a correct calculation of the volume of water present. </p> <div class=\"container-fluid\"> <div class=\"row\"> <div class=\"col-12 col-md-6 col-lg-4\"> <p> <form class=\"w-100\" method=\"GET\" action=\"/well.html\"> <div class=\"form-group\"> <label for=\"diameter\" class=\"font-weight-bold\">Well diameter</label> <input type=\"text\" class=\"form-control\" name=\"diameter\" aria-describedby=\"diameterHelp\" placeholder=\"e.g. 250\"> <small id=\"diameterHelp\" class=\"form-text text-muted\">The diameter of the well in CM.</small> </div> <div class=\"form-group\"> <label for=\"depth\" class=\"font-weight-bold\">Well depth</label> <input type=\"text\" class=\"form-control\" name=\"depth\" placeholder=\"e.g. 200\" aria-describedby=\"depthHelp\"> <small id=\"depthHelp\" class=\"form-text text-muted\">The depth of the well in CM.</small> </div> <div class=\"form-group\"> <label for=\"distance\" class=\"font-weight-bold\">Meter distance</label> <input type=\"text\" class=\"form-control\" name=\"distance\" placeholder=\"e.g. 40\" aria-describedby=\"distanceHelp\"> <small id=\"distanceHelp\" class=\"form-text text-muted\">The distance of the meter above the well in CM. (For example if you put it in the shaft above it).</small> </div> <button type=\"submit\" class=\"btn btn-primary w-100\">Save</button> </form> </p> </div> </div> </div> </div>";
+    String body = "<div class=\"col-md-10\" style=\"background-color: #f8f9fc;\"> <h1 class=\"h3 mb-0 text-gray-800 mt-3\">Well settings</h1> <p class=\"mt-3\"> Here the well settings need to be configured to do a correct calculation of the volume of water present. </p> <div class=\"container-fluid\"> <div class=\"row\"> <div class=\"col-12 col-md-6 col-lg-4\"> <p> <form class=\"w-100\" method=\"GET\" action=\"/well.html\"> <div class=\"form-group\"> <label for=\"diameter\" class=\"font-weight-bold\">Well diameter</label> <input value=";
+    body += diameter;
+    body += " required type=\"text\" class=\"form-control\" name=\"diameter\" aria-describedby=\"diameterHelp\" placeholder=\"e.g. 250\"> <small id=\"diameterHelp\" class=\"form-text text-muted\">The diameter of the well in CM.</small> </div> <div class=\"form-group\"> <label for=\"depth\" class=\"font-weight-bold\">Well depth</label> <input value=";
+    body += depth;
+    body += " required type=\"text\" class=\"form-control\" name=\"depth\" placeholder=\"e.g. 200\" aria-describedby=\"depthHelp\"> <small id=\"depthHelp\" class=\"form-text text-muted\">The depth of the well in CM.</small> </div> <div class=\"form-group\"> <label for=\"distance\" class=\"font-weight-bold\">Meter distance</label> <input value=";
+    body += distance;
+    body += " required type=\"text\" class=\"form-control\" name=\"distance\" placeholder=\"e.g. 40\" aria-describedby=\"distanceHelp\"> <small id=\"distanceHelp\" class=\"form-text text-muted\">The distance of the meter above the well in CM. (For example if you put it in the shaft above it).</small> </div> <button type=\"submit\" class=\"btn btn-primary w-100\">Save</button> </form> </p> </div> </div> </div> </div>";
+
+    return body;
   } else {
     return "<div class=\"col-md-10\" style=\"background-color: #f8f9fc;\"> <h1 class=\"h3 mb-0 text-gray-800 mt-3\">Dashboard</h1> <p class=\"mt-3\"> Thank you for using the Water Well Monitor which is currently under development. </p> <p> To get started go to the well settings to configure your well configuration (height, diameter, ...). <br />After this has been done please configure when measurements need to be taken in the measurements setting. </p> </div>";
   }
