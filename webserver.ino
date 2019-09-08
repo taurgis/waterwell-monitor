@@ -23,7 +23,7 @@ void initializeServer() {
   Serial.println(ssid);
   
   WiFi.begin(ssid, password);
-  EEPROM.begin(512);
+  EEPROM.begin(25);
   
   while (WiFi.status() != WL_CONNECTED) {
     delay(500);
