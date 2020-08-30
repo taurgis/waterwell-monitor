@@ -1,21 +1,15 @@
 #include <EEPROM.h>
-#include <TaskScheduler.h>
 
 int diameter = 0;
 int depth = 0;
 int distance = 0;
-
-void calculateRemainingLiters();
-
-Task measure(2000, TASK_FOREVER, &calculateRemainingLiters);
-Scheduler runner;
 
 /**
 
 */
 void setup() {
   EEPROM.begin(25);
-  Serial.begin(9600); // Open serial monitor at 115200 baud to see ping results.
+  Serial.begin(9600);
   Serial.println("Initializing Water Well Monitor...");
 
   diameter = EEPROM.read(1);
@@ -30,14 +24,7 @@ void setup() {
   Serial.println("");
 
   initDistanceSensor();
-  initializeServer();
-  
-  runner.init();
-  Serial.println("Initialized scheduler");
-  
-  runner.addTask(measure);
-
-  measure.enable();
+  // initializeServer();
 
   Serial.println("Water Well Monitor initialized.");
 }
@@ -46,8 +33,8 @@ void setup() {
 
 */
 void loop() {
-  handleRequests();
-  runner.execute();
+  calculateRemainingLiters();
+  delay(2000);
 }
 
 void calculateRemainingLiters() {
