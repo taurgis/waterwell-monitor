@@ -6,7 +6,7 @@
 const char* ssid     = "";
 const char* password = "";
 
-WiFiClient client;
+// WiFiClient client;
 
 String header;
 
